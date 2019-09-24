@@ -1,6 +1,6 @@
 import React from 'react'
 import { AuthConsumer, } from "../providers/AuthProvider";
-import { Menu, } from 'semantic-ui-react'
+import { Menu, Image, } from 'semantic-ui-react'
 import { Link, withRouter, } from 'react-router-dom'
 
 class Navbar extends React.Component {
@@ -10,9 +10,11 @@ class Navbar extends React.Component {
     if (user) {
       return (
         <Menu.Menu position='right'>
-          <Menu.Item
+          <Menu.Item color='red'
             name='logout'
             onClick={ () => handleLogout(this.props.history) }
+            active={location.pathname === '/logout'}
+            activeStyle={StyleSheet.active}
           />
         </Menu.Menu>
       )
@@ -24,6 +26,7 @@ class Navbar extends React.Component {
               id='login'
               name='login'
               active={location.pathname === '/login'}
+              activeStyle={StyleSheet.active}
             />
           </Link>
           <Link to='/register'>
@@ -31,6 +34,7 @@ class Navbar extends React.Component {
               id='register'
               name='register'
               active={location.pathname === '/register'}
+              activeStyle={StyleSheet.active}
             />
           </Link>
         </Menu.Menu>
@@ -40,18 +44,29 @@ class Navbar extends React.Component {
   
   render() {
     return (
-      <div>
-        <Menu pointing secondary>
-          <Link to='/'>
-            <Menu.Item color="violet"
-              name='home'
-              id='home'
-              active={this.props.location.pathname === '/'}
-            />
-          </Link>
-            { this.rightNavItems() }
-        </Menu>
+      <>
+        <div>
+          <Menu inverted pointing secondary>
+            <Link to='/'>
+              <Menu.Item color="violet"
+                name='home'
+                id='home'
+                active={this.props.location.pathname === '/'}
+              />
+            </Link>
+              { this.rightNavItems() }
+          {/* <Image src={requestAnimationFrame('../images/myspace.png')} alt='logo' /> */}
+          </Menu>
       </div>
+        <div style={{display: 'flex', justifyContent: 'center' }} />
+          <div style={{
+            disply: 'flex',
+            justifyContent: '',
+            width: '50%',
+            height: '280px'
+          }}
+          />
+      </>
     )
   };
 };
@@ -66,6 +81,14 @@ export class ConnectedNavbar extends React.Component {
       </AuthConsumer>
     )
   ;}
+};
+
+const styles = {
+  active: {
+    color: 'orange',
+    fontWeight: 'bold',
+
+  }
 };
 
 export default withRouter(ConnectedNavbar);

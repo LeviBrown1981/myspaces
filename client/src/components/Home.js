@@ -55,10 +55,10 @@ class Home extends React.Component {
               </Card.Meta>
             </Card.Content>
             <Card.Content extra>
-            <Button color="red" icon basic onClick={() => this.downVote(cat.id)}>
+            <Button color="red" icon basic onClick={() => this.downVote(person.id)}>
               <Icon name="thumbs down" />
             </Button>
-            <Button color="green" icon basic onClick={() => this.upvote(cat.id)}>
+            <Button color="green" icon basic onClick={() => this.upvote(person.id)}>
               <Icon name="thumbs up" />
             </Button>
             </Card.Content>
