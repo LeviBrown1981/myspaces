@@ -7,8 +7,10 @@ class Home extends React.Component {
   state = { peoples: [], };
   
   componentDidMount() {
-    axios.get('/api/peoples')
-      .then(res => this.setState({ peoples: res.data, }))
+    axios.get('/api/people')
+      .then(res => {
+        this.setState({ peoples: res.data, })
+      })
   }
   
   downVote = (id) => {
@@ -42,7 +44,7 @@ class Home extends React.Component {
             <Grid.Column>
               <div>
                 <br />
-                <Header as='h1'>Myspaced</Header>
+                <Header as='h1' textAligned='centered'>Myspaced</Header>
                 <br />
                 <Card key={peoples.id}>
                   <Image src={peoples.avatar} />
@@ -66,20 +68,20 @@ class Home extends React.Component {
                   </Button>
                   </Card.Content>
                 </Card>
-                <Link to="/my_people">
+                <Link to="/my_peeps">
                   <Button color="blue">
-                    My People
+                    My Peeps
                   </Button>
                 </Link>
               </div>
             </Grid.Column>
           </Grid.Row>
-        </Grid>
+         </Grid>
       );
-    } else {
-      return <Header textAlign="center">No Peeps</Header>
-    }
-  }
-}
+      } else {
+        return <Header textAlign="center">No Peeps</Header>
+    };
+  };
+};
 
 export default Home;

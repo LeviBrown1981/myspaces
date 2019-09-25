@@ -2,7 +2,7 @@ class Api::PeopleController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    render json: User.random_peoples(current_user.liked_peoples)
+    render json: User.random_person(current_user.liked_people)
   end
 
   def update

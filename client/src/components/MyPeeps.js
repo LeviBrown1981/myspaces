@@ -14,13 +14,13 @@ class MyPeeps extends React.Component {
     const { peeps, } = this.state;
     return (
       <Card.Group itemsPerRow={4}>
-        { peeps.map( cat =>
-          <Card key={peeps.id}>
-            <Image src={peeps.avatar} />
+        { peeps.map( peep =>
+          <Card key={peep.id}>
+            <Image src={peep.avatar} />
             <Card.Content>
               <Divider />
               <Card.Header>
-                { peeps.name }
+                { peep.name }
               </Card.Header>
             </Card.Content>
           </Card>
