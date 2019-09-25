@@ -14,7 +14,6 @@ class Navbar extends React.Component {
             name='logout'
             onClick={ () => handleLogout(this.props.history) }
             active={location.pathname === '/logout'}
-            activeStyle={StyleSheet.active}
           />
         </Menu.Menu>
       )
@@ -26,7 +25,7 @@ class Navbar extends React.Component {
               id='login'
               name='login'
               active={location.pathname === '/login'}
-              activeStyle={StyleSheet.active}
+
             />
           </Link>
           <Link to='/register'>
@@ -34,7 +33,7 @@ class Navbar extends React.Component {
               id='register'
               name='register'
               active={location.pathname === '/register'}
-              activeStyle={StyleSheet.active}
+
             />
           </Link>
         </Menu.Menu>
@@ -46,7 +45,7 @@ class Navbar extends React.Component {
     return (
       <>
         <div>
-          <Menu inverted pointing secondary>
+          <Menu pointing secondary>
             <Link to='/'>
               <Menu.Item color="violet"
                 name='home'

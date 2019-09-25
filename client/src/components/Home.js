@@ -1,77 +1,83 @@
 import React from 'react';
 import axios from 'axios';
 import { Link, } from 'react-router-dom';
-import { Header, Image, Card, Button, Icon, } from 'semantic-ui-react';
+import { Header, Image, Card, Button, Icon, Grid, } from 'semantic-ui-react';
 
 class Home extends React.Component {
-  state = { people: [], };
+  state = { peoples: [], };
   
   componentDidMount() {
-    axios.get('/api/people')
-      .then(res => this.setState({ people: res.data, }))
+    axios.get('/api/peoples')
+      .then(res => this.setState({ peoples: res.data, }))
   }
   
   downVote = (id) => {
-    const { cats, } = this.state;
-    this.setState({ cats: cats.filter( c => c.id !== id ), });
+    const { peoples, } = this.state;
+    this.setState({ peoples: peoples.filter( p => p.id !== id ), });
   }
 
   upvote = (id) => {
-    const { cats, } = this.state;
-    axios.put(`/api/cats/${id}`)
-      .then( () => this.setState({ cats: cats.filter( c => c.id !== id ), }) )
+    const { peoples, } = this.state;
+    axios.put(`/api/people/${id}`)
+      .then( () => this.setState({ peoples: peoples.filter( p => p.id !== id ), }) )
   }
 
   sample = () => {
-    const { people, } = this.state;
+    const { peoples, } = this.state;
 
-    if (people.length) {
-      const index = Math.floor(Math.random() * people.length);
-      return people[index];
+    if (peoples.length) {
+      const index = Math.floor(Math.random() * peoples.length);
+      return peoples[index];
     } else {
       return null;
     }
   }
   
   render() {
-    const person = this.sample();
-    if (person) {
+    const peoples = this.sample();
+    if (peoples) {
       return (
-        <div>
-          <br />
-          <Header as='h1'>person Tinder</Header>
-          <br />
-          <Card key={person.id}>
-            <Image src={person.avatar} />
-            <Card.Content>
-              <Card.Header>
-                { person.name }
-              </Card.Header>
-              <Card.Description>
-                { person.breed }
-              </Card.Description>
-              <Card.Meta>
-                { person.registry }
-              </Card.Meta>
-            </Card.Content>
-            <Card.Content extra>
-            <Button color="red" icon basic onClick={() => this.downVote(person.id)}>
-              <Icon name="thumbs down" />
-            </Button>
-            <Button color="green" icon basic onClick={() => this.upvote(person.id)}>
-              <Icon name="thumbs up" />
-            </Button>
-            </Card.Content>
-          </Card>
-          <Link to="/my_people">
-            <Button color="blue">
-              My People
-            </Button>
-          </Link>
-        </div>
+        <Grid columns='three' divided>
+          <Grid.Row>
+            <Grid.Column>
+              <div>
+                <br />
+                <Header as='h1'>Myspaced</Header>
+                <br />
+                <Card key={peoples.id}>
+                  <Image src={peoples.avatar} />
+                  <Card.Content>
+                    <Card.Header>
+                      { peoples.name }
+                    </Card.Header>
+                    <Card.Description>
+                      { peoples.breed }
+                    </Card.Description>
+                    <Card.Meta>
+                      { peoples.registry }
+                    </Card.Meta>
+                  </Card.Content>
+                  <Card.Content extra>
+                  <Button color="red" icon basic onClick={() => this.downVote(peoples.id)}>
+                    <Icon name="thumbs down" />
+                  </Button>
+                  <Button color="green" icon basic onClick={() => this.upvote(peoples.id)}>
+                    <Icon name="thumbs up" />
+                  </Button>
+                  </Card.Content>
+                </Card>
+                <Link to="/my_people">
+                  <Button color="blue">
+                    My People
+                  </Button>
+                </Link>
+              </div>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
       );
     } else {
-      return <Header textAlign="center">No More People</Header>
+      return <Header textAlign="center">No Peeps</Header>
     }
   }
 }
